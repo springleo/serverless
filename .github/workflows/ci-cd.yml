@@ -7,6 +7,12 @@ on:
   pull_request:
     branches:
       - main         # Trigger on pull requests to 'main'
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "Specify the Terraform action (apply or destroy)"
+        required: true
+        default: "apply"
 
 jobs:
   setup:
@@ -78,6 +84,18 @@ jobs:
           cd infra
           terraform init  # Initialize Terraform configuration
 
-      - name: Terraform Apply
-        run: terraform apply -auto-approve  # Apply Terraform configuration changes
+      - name: Terraform Plan
+        run: terraform plan -out=tfplan
+        working-directory: infra
+        env:
+          TF_ACTION: ${{ github.event.inputs.action }}
+
+      - name: Terraform Apply or Destroy
+        if: ${{ github.event.inputs.action == 'apply' }}
+        run: terraform apply -auto-approve tfplan
+        working-directory: infra
+
+      - name: Terraform Apply or Destroy
+        if: ${{ github.event.inputs.action == 'apply' }}
+        run: terraform apply -auto-approve tfplan
         working-directory: infra
