@@ -27,6 +27,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          cd infra
           npm install  # Install Node.js dependencies for Serverless
           terraform init  # Initialize Terraform configuration
 
@@ -36,7 +37,9 @@ jobs:
       #   working-directory: infra
 
       - name: Terraform Plan
-        run: terraform plan  # Check Terraform configuration changes
+        run: |
+          cd infra
+          terraform plan  # Check Terraform configuration changes
 
   deploy:
     runs-on: ubuntu-latest
