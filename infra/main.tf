@@ -13,6 +13,15 @@ resource "aws_dynamodb_table" "feedback_table" {
   }
 }
 
+terraform {
+  backend "s3" {
+    bucket         = "serverless-framework-deployments-ap-south-1-3264d127-bbb4"
+    key            = "./terraform.tfstate"
+    region         = "ap-south-1"
+    dynamodb_table = "terraform-lock-table"
+    encrypt        = true
+  }
+}
 
 data "aws_iam_policy_document" "lambda_assume_role_policy" {
   statement {
