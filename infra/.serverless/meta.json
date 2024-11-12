@@ -18,7 +18,10 @@
         "runtime": "python3.9",
         "region": "ap-south-1",
         "stage": "dev",
-        "versionFunctions": true
+        "versionFunctions": true,
+        "environment": {
+          "IS_LOCAL": "true"
+        }
       },
       "functions": {
         "saveFeedback": {
@@ -38,10 +41,18 @@
     },
     "serviceRawFile": "service: feedback-api\r\nprovider:\r\n  name: aws\r\n  runtime: python3.9\r\n  region: ap-south-1\r\nfunctions:\r\n  saveFeedback:\r\n    handler: handler.handler\r\n    events:\r\n      - http:\r\n          path: feedback\r\n          method: post\r\nresources: {}\r\n  # Resources:\r\n  #   FeedbackTable:\r\n  #     Type: AWS::DynamoDB::Table\r\n  #     Properties:\r\n  #       TableName: FeedbackTable\r\n  #       AttributeDefinitions:\r\n  #         - AttributeName: id\r\n  #           AttributeType: S\r\n  #       KeySchema:\r\n  #         - AttributeName: id\r\n  #           KeyType: HASH\r\n  #       BillingMode: PAY_PER_REQUEST\r\n",
     "command": [
-      "remove"
+      "invoke",
+      "local"
     ],
-    "options": {},
-    "error": null,
+    "options": {
+      "function": "saveFeedback",
+      "path": "mock-event.json"
+    },
+    "error": {
+      "message": "`python3 -u /home/springleo/.serverless/releases/4.4.7/package/lib/plugins/aws/invoke-local/runtime-wrappers/invoke.py handler handler` Exited with code 1",
+      "stack": "Error: `python3 -u /home/springleo/.serverless/releases/4.4.7/package/lib/plugins/aws/invoke-local/runtime-wrappers/invoke.py handler handler` Exited with code 1\n    at ChildProcess.<anonymous> (file:///home/springleo/.serverless/releases/4.4.7/package/dist/sf-core.js:426:45500)\n    at ChildProcess.emit (node:events:517:28)\n    at ChildProcess.emit (node:domain:489:12)\n    at maybeClose (node:internal/child_process:1098:16)\n    at ChildProcess._handle.onexit (node:internal/child_process:303:5)",
+      "code": 1
+    },
     "params": {},
     "machineId": "4cf56c03c66604133bace6cadcd15d03",
     "stage": "dev",
@@ -68,7 +79,7 @@
     "projectType": "traditional",
     "versionSf": "4.4.7",
     "serviceProviderAwsCfStackName": "feedback-api-dev",
-    "serviceUniqueId": "arn:aws:cloudformation:ap-south-1:816720949859:stack/feedback-api-dev/b6946d30-a0da-11ef-83c9-0a9118956e45",
+    "serviceUniqueId": null,
     "serviceProviderAwsCfStackId": "arn:aws:cloudformation:ap-south-1:816720949859:stack/feedback-api-dev/b6946d30-a0da-11ef-83c9-0a9118956e45",
     "serviceProviderAwsCfStackCreated": "2024-11-12T09:44:29.914Z",
     "serviceProviderAwsCfStackUpdated": null,
@@ -91,7 +102,6 @@
         "OutputValue": "serverless-framework-deployments-ap-south-1-3264d127-bbb4",
         "ExportName": "sls-feedback-api-dev-ServerlessDeploymentBucketName"
       }
-    ],
-    "integrations": {}
+    ]
   }
 }
