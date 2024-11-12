@@ -1,0 +1,25 @@
+service: feedback-api
+provider:
+  name: aws
+  runtime: python3.9
+  region: ap-south-1
+functions:
+  saveFeedback:
+    handler: handler.handler
+    events:
+      - http:
+          path: feedback
+          method: post
+resources: {}
+  # Resources:
+  #   FeedbackTable:
+  #     Type: AWS::DynamoDB::Table
+  #     Properties:
+  #       TableName: FeedbackTable
+  #       AttributeDefinitions:
+  #         - AttributeName: id
+  #           AttributeType: S
+  #       KeySchema:
+  #         - AttributeName: id
+  #           KeyType: HASH
+  #       BillingMode: PAY_PER_REQUEST
