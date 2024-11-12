@@ -84,6 +84,10 @@ jobs:
           cd infra
           terraform init  # Initialize Terraform configuration
 
+      - name: Refresh Terraform State
+        run: terraform refresh
+        working-directory: infra
+
       - name: Terraform Plan
         run: terraform plan -out=tfplan
         working-directory: infra
