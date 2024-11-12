@@ -35,23 +35,7 @@ jobs:
         run: |
           cd infra
           npm install  # Install Node.js dependencies for Serverless
-          terraform init  # Initialize Terraform configuration
 
-      # - name: Run Tests
-      #   run: |
-      #     npm test  # Run any tests for your Node.js app
-      #   working-directory: infra
-      - name: Set up AWS CLI
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: 'ap-south-1'  # Specify your AWS region
-
-      - name: Terraform Plan
-        run: |
-          cd infra
-          terraform plan  # Check Terraform configuration changes
 
   deploy:
     runs-on: ubuntu-latest
