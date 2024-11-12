@@ -63,8 +63,12 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: 'ap-south-1'  # Specify your AWS region
 
-      
-      - name: Deploy with Serverless Framework
+      - name: Debug Environment
+        run: echo $SERVERLESS_ACCESS_KEY
+        env:
+          SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
+
+      - name: Login to  Serverless Framework
         run: npx serverless login
         working-directory: infra  # Adjust path if serverless.yml is in a subfolder
         env:
