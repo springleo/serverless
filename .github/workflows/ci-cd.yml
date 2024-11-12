@@ -73,6 +73,10 @@ jobs:
       #   working-directory: infra  # Adjust path if serverless.yml is in a subfolder
       #   env:
       #     SERVERLESS_ACCESS_KEY: ${{ env.SERVERLESS_ACCESS_KEY }}
+      - name: TF init
+        run: |
+          cd infra
+          terraform init  # Initialize Terraform configuration
 
       - name: Terraform Apply
         run: terraform apply -auto-approve  # Apply Terraform configuration changes
