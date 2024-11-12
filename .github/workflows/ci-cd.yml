@@ -83,15 +83,7 @@ jobs:
         if: ${{ github.event.inputs.action == 'apply' }}
         run: terraform apply -auto-approve tfplan
         working-directory: infra
-
-      - name: Terraform Debug
-        run: terraform show -json > tfstate.json
-        working-directory: infra
-
-      - name: View State File
-        run: cat infra/tfstate.json
         
-
       - name: Terraform Destroy
         if: ${{ github.event.inputs.action == 'destroy' }}
         run: terraform destroy -auto-approve
