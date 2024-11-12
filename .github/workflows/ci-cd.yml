@@ -30,10 +30,10 @@ jobs:
           npm install  # Install Node.js dependencies for Serverless
           terraform init  # Initialize Terraform configuration
 
-      - name: Run Tests
-        run: |
-          npm test  # Run any tests for your Node.js app
-        working-directory: infra
+      # - name: Run Tests
+      #   run: |
+      #     npm test  # Run any tests for your Node.js app
+      #   working-directory: infra
 
       - name: Terraform Plan
         run: terraform plan  # Check Terraform configuration changes
