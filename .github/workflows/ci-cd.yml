@@ -76,3 +76,4 @@ jobs:
 
       - name: Terraform Apply
         run: terraform apply -auto-approve  # Apply Terraform configuration changes
+        working-directory: infra
