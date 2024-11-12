@@ -55,14 +55,14 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: 'us-east-1'  # Specify your AWS region
+          aws-region: 'ap-south-1'  # Specify your AWS region
 
       # - name: Deploy with Serverless Framework
       #   run: |
       #     npx serverless deploy  # Deploy using Serverless Framework
       - name: Deploy with Serverless Framework
         run: npx serverless deploy
-        working-directory: ./infra/serverless.yml  # Adjust path if serverless.yml is in a subfolder
+        working-directory: infra  # Adjust path if serverless.yml is in a subfolder
 
       - name: Terraform Apply
         run: terraform apply -auto-approve  # Apply Terraform configuration changes
